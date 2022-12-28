@@ -1,0 +1,81 @@
+<html>
+<head>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="assets/Logo.png">
+    <title>Temperature Converter</title>
+</head>
+<body>
+    <h1>Temperature Converter</h1>
+    <p>Enter a temperature in Fahrenheit:</p>
+    <input type="text" id="fahrenheit">
+    <button onclick="convertTemperature('fahrenheit', 'celsius')">Convert</button>
+    <p id="fahrenheit-result"></p>
+  
+    <p>Enter a temperature in Celsius:</p>
+    <input type="text" id="celsius">
+    <button onclick="convertTemperature('celsius', 'fahrenheit')">Convert</button>
+    <p id="celsius-result"></p>
+  
+    <button onclick="toggleTheme()">Toggle Theme</button>
+  
+    <script>
+    function convertTemperature(fromUnit, toUnit) {
+        // Get the inputed temperature
+        var temperature = document.getElementById(fromUnit).value;
+      
+        // Check if the inputed temperature is a number
+        if (!isNaN(temperature)) {
+          // Convert the temperature to the other unit
+        if (fromUnit === 'fahrenheit') {
+          var convertedTemperature = (temperature - 32) * (5 / 9);
+        } else {
+          var convertedTemperature = (temperature * 9 / 5) + 32;
+        }
+        
+        // Round the result to one decimal place
+        convertedTemperature = convertedTemperature.toFixed(1);
+        
+        // Display the result
+        document.getElementById(fromUnit + "-result").innerHTML = temperature + "&deg; " + fromUnit.toLowerCase() + " is equivalent to " + convertedTemperature + "&deg; " + toUnit.toLowerCase();
+        } else {
+        // Display an error message
+        document.getElementById(fromUnit + "-result").innerHTML = "Your input is not a number!";
+        }
+    }
+    
+    function toggleTheme() {
+        // Get the body element
+        var body = document.body;
+      
+        // Check if the current theme is light
+        if (body.classList.contains("light-theme")) {
+        // Switch to the dark theme
+        body.classList.remove("light-theme");
+        body.classList.add("dark-theme");
+        } else {
+        // Switch to the light theme
+        body.classList.remove("dark-theme");
+        body.classList.add("light-theme");
+        }
+    }
+    </script>
+
+<h2>API</h2>
+
+<h4>Our temperature converter API allows you to easily convert temperatures between different units using a simple HTTP request. The API accepts three query string parameters: "from", "to", and "value". The "from" and "to" parameters specify the units to convert from and to, respectively, and the "value" parameter specifies the value to convert. The API returns the result as a simple number!</h4>
+
+<h3>Available Units</h3>
+<li>C: Celsius</li>
+<li>F: Fahrenheit</li>
+<li>K: Kelvin</li>
+<h3>Example</h3>
+<p>To convert 100 degrees Celsius to Fahrenheit, you can send the following request to the API endpoint:</p>
+<code>http://your-api-endpoint.com/api/convert.php?from=C&to=F&value=100</code>
+</body>
+<footer>
+    <p class="credits">
+        <p>Created by: C#</p>
+        <a href="https://www.youtube.com/@CsharpProgramming"><img class="youtube-icon" src="assets/YT.png" alt="YouTube"></a>
+    </p>
+</footer>
+</html>
